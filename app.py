@@ -8,11 +8,22 @@ st.set_page_config(page_title="SaaS Compliance PPWR", page_icon="📦", layout="
 st.markdown("""
     <style>
     .metric-card {
-        background-color: white; 
+        background-color: #1E293B; /* Sfondo scuro elegante in stile dashboard */
+        border: 1px solid #334155;
         padding: 20px; 
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
         text-align: center;
+    }
+    .metric-card h3 {
+        color: #94A3B8 !important; /* Grigio chiaro per il sottotitolo */
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+    .metric-card h2 {
+        color: #F8FAFC !important; /* Bianco brillante per il numero */
+        font-size: 2.5rem;
+        margin-top: 0;
     }
     </style>
     """, unsafe_allow_html=True)
