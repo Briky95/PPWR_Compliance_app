@@ -45,8 +45,27 @@ if 'componenti' not in st.session_state:
 # --- NAVIGAZIONE PRINCIPALE ---
 st.title("🌱 PPWR Compliance & Material Mapping SaaS")
 menu = st.sidebar.radio("VISTE APPLICAZIONE", ["📊 Dashboard Globale", "➕ Inserisci Prodotto & BOM", "🔍 Analisi di Prodotto"])
+# --- AGGIORNAMENTO SEZIONE IMPORTAZIONE (Sostituisci la parte della barra laterale) ---
 st.sidebar.markdown("---")
-st.sidebar.info("💡 **CTO Note:** Questa interfaccia simula il flusso di lavoro definitivo per il settore alimentare.")
+st.sidebar.subheader("📥 Importazione Massiva")
+uploaded_file = st.sidebar.file_uploader("Carica Distinta Base (Excel)", type=["xlsx"])
+
+if uploaded_file is not None:
+    try:
+        df_nuovo = pd.read_excel(uploaded_file)
+        # Semplice validazione colonne
+        required = ["prodotto_id", "componente", "livello", "materiale", "peso", "contatto_alim"]
+        if all(col in df_nuovo.columns for col in required):
+            nuovi_dati = df_nuovo.to_dict('records')
+            # Aggiungiamo i campi di default per la compliance
+            for row in nuovi_dati:
+                row.update({"moca": "🔴 Mancante", "pfas": "🔴 Mancante", "metalli": "🔴 Mancante", "riciclo": "🔴 Mancante"})
+            st.session_state.componenti.extend(nuovi_dati)
+            st.sidebar.success("✅ Dati importati correttamente!")
+        else:
+            st.sidebar.error(f"Errore: Il file deve contenere queste colonne: {required}")
+    except Exception as e:
+        st.sidebar.error(f"Errore durante l'importazione: {e}")
 
 # ==========================================
 # 1. FUNZIONALITÀ: DASHBOARD GLOBALE
