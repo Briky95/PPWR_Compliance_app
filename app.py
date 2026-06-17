@@ -4,7 +4,6 @@ import pandas as pd
 # Configurazione della pagina per un look moderno ed elegante
 st.set_page_config(page_title="SaaS Compliance PPWR", page_icon="📦", layout="wide")
 
-# --- STILE CSS PERSONALIZZATO (Per rendere l'interfaccia più B2B/Professionale) ---
 # --- STILE CSS PERSONALIZZATO ---
 st.markdown("""
     <style>
@@ -50,14 +49,11 @@ if menu == "📊 Dashboard Globale":
     
     col_kpi1, col_kpi2, col_kpi3 = st.columns(3)
     with col_kpi1:
-        st.markdown(f"<div class='metric-card'><h3>Prodotti a Catalogo</h3><h2>{tot_prod}</h2></div>", unsafe_allowed_html=True)
+        st.markdown(f"<div class='metric-card'><h3>Prodotti a Catalogo</h3><h2>{tot_prod}</h2></div>", unsafe_allow_html=True)
     with col_kpi2:
-        st.markdown(f"<div class='metric-card'><h3>Componenti Packaging Mappati</h3><h2>{tot_comp}</h2></div>", unsafe_allowed_html=True)
+        st.markdown(f"<div class='metric-card'><h3>Componenti Packaging Mappati</h3><h2>{tot_comp}</h2></div>", unsafe_allow_html=True)
     with col_kpi3:
-        # Calcolo rapido percentuale doc approvati
-        doc_totali = tot_comp * 4
-        # un calcolo approssimativo dei verdi per fare scena
-        st.markdown("<div class='metric-card'><h3>Rating Conformità Medio</h3><h2>72%</h2></div>", unsafe_allowed_html=True)
+        st.markdown("<div class='metric-card'><h3>Rating Conformità Medio</h3><h2>72%</h2></div>", unsafe_allow_html=True)
 
     st.markdown("### 📋 Elenco Prodotti e Stato di Avanzamento")
     
@@ -119,7 +115,7 @@ elif menu == "➕ Inserisci Prodotto & BOM":
             
             submit_c = st.form_submit_button("Aggiungi Componente alla Distinta Base")
             if submit_c and nome_c:
-                # Logica di pre-compilazione degli stati documentali (Intelligenza SaaS)
+                # Logica di pre-compilazione degli stati documentali
                 nuovo_comp = {
                     "prodotto_id": prod_target["id"],
                     "componente": nome_c,
@@ -135,7 +131,7 @@ elif menu == "➕ Inserisci Prodotto & BOM":
                 st.session_state.componenti.append(nuovo_comp)
                 st.success(f"✅ '{nome_c}' aggiunto con successo alla distinta base!")
 
-        # Mostra la distinta base attuale del prodotto selezionato in fondo
+        # Mostra la distinta base attuale del prodotto selezionato
         st.markdown("### Distinta base attuale per questo prodotto:")
         comp_attuali = [c for c in st.session_state.componenti if c["prodotto_id"] == prod_target["id"]]
         if comp_attuali:
@@ -159,7 +155,7 @@ elif menu == "🔍 Analisi di Prodotto":
             with st.expander(f"📦 {c['componente']} — Livello {c['livello']} ({c['materiale']})"):
                 col1, col2, col3, col4 = st.columns(4)
                 
-                # Interfaccia di approvazione dei documenti (Simula l'azione del controllo qualità)
+                # Interfaccia di approvazione dei documenti
                 c["moca"] = col1.selectbox("Stato MOCA", ["🔴 Mancante", "🟡 In Revisione", "🟢 Approvato", "N/A"], index=["🔴 Mancante", "🟡 In Revisione", "🟢 Approvato", "N/A"].index(c["moca"]), key=f"moca_{i}")
                 c["pfas"] = col2.selectbox("Stato PFAS (Art.5)", ["🔴 Mancante", "🟡 In Revisione", "🟢 Approvato", "N/A"], index=["🔴 Mancante", "🟡 In Revisione", "🟢 Approvato", "N/A"].index(c["pfas"]), key=f"pfas_{i}")
                 c["metalli"] = col3.selectbox("Metalli Pesanti", ["🔴 Mancante", "🟡 In Revisione", "🟢 Approvato"], index=["🔴 Mancante", "🟡 In Revisione", "🟢 Approvato"].index(c["metalli"]), key=f"met_{i}")
