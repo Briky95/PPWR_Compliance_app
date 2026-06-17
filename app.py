@@ -14,7 +14,7 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;
     }
     </style>
-    """, unsafe_allowed_back-safe=True)
+   """, unsafe_allowed_html=True)
 
 # --- STATO DELL'APPLICAZIONE (Database temporaneo in memoria) ---
 if 'prodotti' not in st.session_state:
