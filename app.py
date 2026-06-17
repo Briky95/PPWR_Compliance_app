@@ -5,16 +5,18 @@ import pandas as pd
 st.set_page_config(page_title="SaaS Compliance PPWR", page_icon="📦", layout="wide")
 
 # --- STILE CSS PERSONALIZZATO (Per rendere l'interfaccia più B2B/Professionale) ---
+# --- STILE CSS PERSONALIZZATO (Versione corretta) ---
 st.markdown("""
     <style>
-    .reportview-container { background: #f5f7f9; }
-    .stProgress .st-bo { background-color: #2e7d32; }
     .metric-card {
-        background-color: white; padding: 20px; border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;
+        background-color: white; 
+        padding: 20px; 
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+        text-align: center;
     }
     </style>
-   """, unsafe_allowed_html=True)
+    """, unsafe_allowed_html=True)
 
 # --- STATO DELL'APPLICAZIONE (Database temporaneo in memoria) ---
 if 'prodotti' not in st.session_state:
