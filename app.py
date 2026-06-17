@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(page_title="SaaS Compliance PPWR", page_icon="📦", layout="wide")
 
 # --- STILE CSS PERSONALIZZATO (Per rendere l'interfaccia più B2B/Professionale) ---
-# --- STILE CSS PERSONALIZZATO (Versione corretta) ---
+# --- STILE CSS PERSONALIZZATO ---
 st.markdown("""
     <style>
     .metric-card {
@@ -16,7 +16,7 @@ st.markdown("""
         text-align: center;
     }
     </style>
-    """, unsafe_allowed_html=True)
+    """, unsafe_allow_html=True)
 
 # --- STATO DELL'APPLICAZIONE (Database temporaneo in memoria) ---
 if 'prodotti' not in st.session_state:
